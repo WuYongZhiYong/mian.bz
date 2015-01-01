@@ -3,7 +3,6 @@ require! koa
 require! marked
 require! \./db
 require! thunkify
-L = require \lodash-node
 bodyParser = require \koa-bodyparser
 favicon = require \koa-favicon
 request = require \cc-superagent-promise
@@ -31,8 +30,13 @@ app.use (next) ->*
     unless doc
         return
 
-    @body = '<script src="/node_modules/superagent/superagent.js"></script>'
-    @body += doc.html
+    @body = '<!doctype html>'
+    @body += '<script src="/node_modules/superagent/superagent.js"></script>'
+    @body += '<script src="/node_modules/marked/lib/marked.js"></script>'
+    @body += '<script src="/node_modules/vue/dist/vue.js"></script>'
+    @body += "<div id=editor><div v-html=\"content | marked\">#{doc.html}</div><div v-show=\"showEditor\"><textarea v-model=\"content\"></textarea><button v-on=\"click: save\">保存</button></div>"
+    @body += "<script>doc = #{JSON.stringify(doc)}</script>"
+    @body += '<script src="/js/doc.js"></script>'
 
 app.use bodyParser!
 app.use (next) ->*
@@ -52,7 +56,7 @@ app.use (next) ->*
     html.replace /<h1[^>]+>([^\n]+)<\/h1>/i, (all, title) ->
         title = title
     title ||= @path
-    doc = L.assign {}, oldDoc, {
+    doc = {} <<< oldDoc <<< {
         @path
         domain
         title,
