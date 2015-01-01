@@ -68,4 +68,4 @@ app.use (next) ->*
     [updatedCount, doc] = yield updateDoc queryObj, doc, { upsert: yes }
     @body = { doc, success: yes }
 
-app.listen 3000
+app.listen process.env.PORT || 3000
