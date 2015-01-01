@@ -28,7 +28,8 @@ app.use (next) ->*
     doc = yield findOneDoc { @path, domain }
 
     unless doc
-        return
+        doc = {}
+        doc.html = doc.content = ''
 
     @body = '<!doctype html>'
     @body += '<script src="/node_modules/superagent/superagent.js"></script>'
