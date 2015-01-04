@@ -1,0 +1,23 @@
+#main {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#main > div {
+}
+#editor {
+    position: fixed;
+    top: 0;
+    height: 100%;
+}
+#editor > button {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+#editor > textarea {
+    height: 100%;
+    width: 100%;
+    border: 0 none;
+    background-color: #f4f4f4;
+}

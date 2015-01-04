@@ -32,10 +32,12 @@ app.use (next) ->*
         doc.html = doc.content = ''
 
     @body = '<!doctype html>'
+    @body += '<link rel="stylesheet" href="/node_modules/typo.css/typo.css">'
+    @body += '<link rel="stylesheet" href="/css/style.css">'
     @body += '<script src="/node_modules/superagent/superagent.js"></script>'
     @body += '<script src="/node_modules/marked/lib/marked.js"></script>'
     @body += '<script src="/node_modules/vue/dist/vue.js"></script>'
-    @body += "<div id=editor><div v-html=\"content | marked\">#{doc.html}</div><div v-show=\"showEditor\"><textarea v-model=\"content\"></textarea><button v-on=\"click: save\">保存</button></div>"
+    @body += "<div id=main><div v-on=\"mouseenter: se()\" v-html=\"content | marked\">#{doc.html}</div><div id=editor v-show=\"showEditor\"><textarea rows=1 v-on=\"mouseleave: he()\" v-model=\"content\"></textarea><button v-on=\"click: save\">保存</button></div>"
     @body += "<script>doc = #{JSON.stringify(doc)}</script>"
     @body += '<script src="/js/doc.js"></script>'
 
