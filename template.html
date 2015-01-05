@@ -1,0 +1,22 @@
+<!doctype html>
+<link rel="stylesheet" href="/node_modules/typo.css/typo.css">
+<link rel="stylesheet" href="/css/style.css">
+<script src="/node_modules/lodash/dist/lodash.js"></script>
+<script src="/node_modules/superagent/superagent.js"></script>
+<script src="/node_modules/marked/lib/marked.js"></script>
+<script src="/node_modules/ractive/ractive.js"></script>
+<div id=main>
+    <div id="content">{{{html}}}</div>
+    <div id=editor-fixed-wrapper>
+        <div id=editor>
+            <textarea rows=1 value="{{content}}"></textarea>
+        </div>
+        <div id="tools-absolute-wrapper">
+            <div id="tools">
+                <button on-click="save">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>doc = {doc}</script>
+<script src="/js/doc.js"></script>

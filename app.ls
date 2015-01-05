@@ -1,4 +1,5 @@
 require! path
+require! fs
 require! koa
 require! marked
 require! \./db
@@ -20,6 +21,7 @@ function getDomain (ctx)
 
 app.use favicon path.join __dirname, 'favicon.ico'
 app.use(require('koa-static')(__dirname), defer: yes)
+template = fs.readFileSync path.join(__dirname, 'template.html'), 'utf-8'
 
 app.use (next) ->*
     unless @method is \GET and (domain = getDomain this)
@@ -31,15 +33,7 @@ app.use (next) ->*
         doc = {}
         doc.html = doc.content = ''
 
-    @body = '<!doctype html>'
-    @body += '<link rel="stylesheet" href="/node_modules/typo.css/typo.css">'
-    @body += '<link rel="stylesheet" href="/css/style.css">'
-    @body += '<script src="/node_modules/superagent/superagent.js"></script>'
-    @body += '<script src="/node_modules/marked/lib/marked.js"></script>'
-    @body += '<script src="/node_modules/vue/dist/vue.js"></script>'
-    @body += "<div id=main><div v-on=\"mouseenter: se()\" v-html=\"content | marked\">#{doc.html}</div><div id=editor v-show=\"showEditor\"><textarea rows=1 v-on=\"mouseleave: he()\" v-model=\"content\"></textarea><button v-on=\"click: save\">保存</button></div>"
-    @body += "<script>doc = #{JSON.stringify(doc)}</script>"
-    @body += '<script src="/js/doc.js"></script>'
+    @body = template.replace('{doc}', JSON.stringify(doc))
 
 app.use bodyParser!
 app.use (next) ->*
