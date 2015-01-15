@@ -4,11 +4,15 @@ require! koa
 require! marked
 require! \./db
 require! thunkify
+kbl = require \koa-bunyan-logger
 bodyParser = require \koa-bodyparser
 favicon = require \koa-favicon
 request = require \cc-superagent-promise
 
 app = exports = module.exports = koa!
+app.use kbl!
+app.use kbl.requestIdContext!
+app.use kbl.requestLogger!
 
 findOneDoc = thunkify db.docs~findOne
 updateDoc = thunkify db.docs~update
