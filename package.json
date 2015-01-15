@@ -37,6 +37,7 @@
     "marked": "^0.3.2",
     "mongoskin": "^1.4.4",
     "ractive": "^0.6.1",
+    "ssl-root-cas": "^1.1.8",
     "superagent": "^0.21.0",
     "thunkify": "^2.1.2",
     "typo.css": "^1.4.0"
