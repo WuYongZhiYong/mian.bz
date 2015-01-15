@@ -23,7 +23,7 @@ p {
     overflow: hidden;
     visibility: hidden;
 }
-#main:hover #editor-fixed-wrapper {
+.edit-enable #main:hover #editor-fixed-wrapper {
     display: block;
     overflow: visible;
     visibility: visible;
