@@ -24,8 +24,8 @@ options = {
 };
 
 var sserver = https.createServer(options, app.callback()).listen(sport, function () {
-  port = sserver.address().port;
-  console.log('Listening on https://127.0.0.1:' + port);
+  sport = sserver.address().port;
+  console.log('Listening on https://127.0.0.1:' + sport);
 });
 
 var server = http.createServer(app.callback()).listen(port, function () {
