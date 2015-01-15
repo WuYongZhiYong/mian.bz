@@ -1,6 +1,9 @@
 html, body {
     height: 100%;
 }
+p {
+    margin: 1em 0;
+}
 #main, #editor, #tools {
     max-width: 800px;
     margin: 0 auto;
