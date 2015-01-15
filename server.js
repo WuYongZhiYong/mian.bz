@@ -1,6 +1,6 @@
 'use strict';
 
-var http = require('https');
+var http = require('http');
 var https = require('https')
   , port = process.argv[3] || 80 // 2 will be --harmony
   , sport = process.argv[4] || 443
@@ -23,10 +23,12 @@ options = {
 , cert: fs.readFileSync(path.join(__dirname, 'certs', 'server', 'mianbz-server.crt.pem'))
 };
 
+/*
 var sserver = https.createServer(options, app.callback()).listen(sport, function () {
   sport = sserver.address().port;
   console.log('Listening on https://127.0.0.1:' + sport);
 });
+*/
 
 var server = http.createServer(app.callback()).listen(port, function () {
   port = server.address().port;
