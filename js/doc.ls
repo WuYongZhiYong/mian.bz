@@ -1,3 +1,4 @@
+body = document.body
 template = document.getElementById('main').innerHTML
 ractive = new Ractive do
     el: '#main',
@@ -13,6 +14,7 @@ ractive.on 'save' ->
         .send doc{content}
         .end!
     alert '保存成功'
+    location.hash = ''
 
 ractive.observe 'content', (newValue) ->
     ractive.set 'html', marked(newValue)
@@ -24,7 +26,6 @@ setImmediate = window.setImmediate or ->
 clearImmediate = window.clearImmediate or window.clearTimeout
 
 textarea = document.querySelector('#editor textarea')
-body = document.body
 shouldSync = true
 function syncScrollTop (triggerFromBody)
     timer = null
@@ -65,9 +66,9 @@ textarea.addEventListener 'scroll', syncScrollTop(false), false
 
 window.addEventListener('hashchange', _, false) (ev) ->
     if location.hash is '#edit'
-        document.body.classList.add \edit-enable
+        body.classList.add \edit-enable
     else
-        document.body.classList.remove \edit-enable
+        body.classList.remove \edit-enable
 
 window.addEventListener('load', _, false) (ev) ->
     if location.hash is '#edit'
