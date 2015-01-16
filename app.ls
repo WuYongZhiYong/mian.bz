@@ -18,9 +18,11 @@ unless env is 'development'
     app.use kbl.requestLogger!
 
 app.use (next) ->*
-    reTailingSlash = /\/($|\?)/
-    if @url.match(reTailingSlash)
-        @redirect @url.replace(reTailingSlash, '')
+    reTailingSlash = /(.*)\/($|\?)/
+    matched = @url.match(reTailingSlash)
+    if matched and matched[1]
+        @redirect @url.replace reTailingSlash, (all, path, tailing) ->
+            path + tailing
     else
         yield next
 
