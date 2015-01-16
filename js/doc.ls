@@ -66,3 +66,9 @@ textarea.addEventListener 'scroll', syncScrollTop(false), false
 window.addEventListener('hashchange', _, false) (ev) ->
     if location.hash is '#edit'
         document.body.classList.add \edit-enable
+    else
+        document.body.classList.remove \edit-enable
+
+window.addEventListener('load', _, false) (ev) ->
+    if location.hash is '#edit'
+        location.hash = ''

@@ -10,9 +10,19 @@ favicon = require \koa-favicon
 request = require \cc-superagent-promise
 
 app = exports = module.exports = koa!
-app.use kbl!
-app.use kbl.requestIdContext!
-app.use kbl.requestLogger!
+
+env = process.env.NODE_ENV || 'development'
+unless env is 'development'
+    app.use kbl!
+    app.use kbl.requestIdContext!
+    app.use kbl.requestLogger!
+
+app.use (next) ->*
+    reTailingSlash = /\/($|\?)/
+    if @url.match(reTailingSlash)
+        @redirect @url.replace(reTailingSlash, '')
+    else
+        yield next
 
 findOneDoc = thunkify db.docs~findOne
 updateDoc = thunkify db.docs~update
