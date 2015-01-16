@@ -71,4 +71,4 @@ window.addEventListener('hashchange', _, false) (ev) ->
 
 window.addEventListener('load', _, false) (ev) ->
     if location.hash is '#edit'
-        location.hash = '#edit_'
+        location.hash = ''
