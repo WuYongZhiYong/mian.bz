@@ -9,7 +9,7 @@ var https = require('https')
   , options
   ;
 
-var app = require('./');
+var app = require('./app.js');
 
 require('ssl-root-cas')
   .inject()
